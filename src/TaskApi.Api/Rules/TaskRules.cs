@@ -26,7 +26,7 @@ public class TaskRules
 
     private static void ValidateTitle(string? title, List<string> errors)
     {
-        if (string.IsNullOrWhiteSpace(title))
+        if (string.IsNullOrEmpty(title))
             errors.Add("O título é obrigatório.");
         else if (title.Trim().Length > MaxTitleLength)
             errors.Add($"O título deve ter no máximo {MaxTitleLength} caracteres.");
