@@ -57,6 +57,9 @@ Feita na máquina de destino com o [docker-compose.yml](../docker-compose.yml), 
 | `IMAGE_TAG` | `latest` | Qual versão da imagem implantar |
 | `HOST_PORT` | `8080` | Porta da máquina onde a API fica acessível |
 | `APP_ENV` | `Production` | Valor de `ASPNETCORE_ENVIRONMENT` |
+| `LOG_LEVEL` | `Information` | Nível de log (`Logging__LogLevel__Default`) |
+
+Os valores podem ficar num arquivo `.env` ao lado do `docker-compose.yml`, criado a partir do [.env.example](../.env.example). Veja o [README](../README.md#configuração-de-ambiente).
 
 O Compose tem um healthcheck que chama `GET /health` a cada 30 segundos. Para isso, o Dockerfile instala o `curl` na imagem, porque a imagem `aspnet:10.0` não traz curl nem wget.
 
