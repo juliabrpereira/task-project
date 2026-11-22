@@ -6,6 +6,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=${APP_ENV:-Production}
       - Logging__LogLevel__Default=${LOG_LEVEL:-Information}
+      - HealthChecks__MemoryLimitMB=${HEALTH_MEMORY_LIMIT_MB:-512}
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS http://localhost:8080/health || exit 1"]

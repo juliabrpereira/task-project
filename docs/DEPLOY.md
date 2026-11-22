@@ -58,6 +58,7 @@ Feita na máquina de destino com o [docker-compose.yml](../docker-compose.yml), 
 | `HOST_PORT` | `8080` | Porta da máquina onde a API fica acessível |
 | `APP_ENV` | `Production` | Valor de `ASPNETCORE_ENVIRONMENT` |
 | `LOG_LEVEL` | `Information` | Nível de log (`Logging__LogLevel__Default`) |
+| `HEALTH_MEMORY_LIMIT_MB` | `512` | Limite de memória do health check (veja [OBSERVABILIDADE.md](OBSERVABILIDADE.md)) |
 
 Os valores podem ficar num arquivo `.env` ao lado do `docker-compose.yml`, criado a partir do [.env.example](../.env.example). Veja o [README](../README.md#configuração-de-ambiente).
 

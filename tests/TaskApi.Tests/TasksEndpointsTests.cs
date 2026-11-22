@@ -7,10 +7,12 @@ namespace TaskApi.Tests;
 
 public class TasksEndpointsTests : IClassFixture<WebApplicationFactory<Program>>
 {
+    private readonly WebApplicationFactory<Program> _factory;
     private readonly HttpClient _client;
 
     public TasksEndpointsTests(WebApplicationFactory<Program> factory)
     {
+        _factory = factory;
         _client = factory.CreateClient();
     }
 
@@ -27,6 +29,20 @@ public class TasksEndpointsTests : IClassFixture<WebApplicationFactory<Program>>
         var response = await _client.GetAsync("/health");
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("Healthy", await response.Content.ReadAsStringAsync());
+    }
+
+    [Fact]
+    public async Task GetHealth_ComMemoriaAcimaDoLimite_Retorna503()
+    {
+        var client = _factory
+            .WithWebHostBuilder(b => b.UseSetting("HealthChecks:MemoryLimitMB", "0"))
+            .CreateClient();
+
+        var response = await client.GetAsync("/health");
+
+        Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+        Assert.Equal("Unhealthy", await response.Content.ReadAsStringAsync());
     }
 
     [Fact]
