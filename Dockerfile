@@ -11,7 +11,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=build /app .
-ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_HTTP_PORTS=8080
 EXPOSE 8080
 USER app
 ENTRYPOINT ["dotnet", "TaskApi.Api.dll"]
